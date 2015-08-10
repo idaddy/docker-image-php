@@ -8,7 +8,7 @@ MAINTAINER Dennis Zou <denniszou@gmail.com>
 
 RUN yum -y install epel-release  \
     && yum -y update \
-    && yum -y install supervisor make php-fpm php-mcrypt libxml2-devel libcurl-devel git \
+    && yum -y install supervisor crontabs make php-fpm php-mcrypt libxml2-devel libcurl-devel git \
         php-pecl-solr2 php-pecl-redis php-mysql php-pdo php-bcmath php-gd php-mbstring \
         php-tidy php-pecl-memcache php-pecl-imagick php-pecl-gearman gcc php-devel re2c pcre-devel yasm \
     && yum -y clean all
