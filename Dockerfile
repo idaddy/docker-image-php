@@ -42,13 +42,15 @@ RUN cd /root \
     && cd /root \
     && rm -rf ffmpeg_php
 
-RUN ln -sf /w/dev-conf/dev-php/php-fpm.conf /etc/php-fpm.conf \
-    && rm -rf /etc/php-fpm.d \
-    && ln -sf /w/dev-conf/dev-php/php-fpm.d /etc/php-fpm.d \
-    && ln -sf /w/dev-conf/dev-php/php.ini /etc/php.ini \
-    && rm -rf /etc/php.d \
-    && ln -sf /w/dev-conf/dev-php/php.d /etc/php.d
+#RUN ln -sf /w/dev-conf/dev-php/php-fpm.conf /etc/php-fpm.conf \
+#    && rm -rf /etc/php-fpm.d \
+#    && ln -sf /w/dev-conf/dev-php/php-fpm.d /etc/php-fpm.d \
+#    && ln -sf /w/dev-conf/dev-php/php.ini /etc/php.ini \
+#    && rm -rf /etc/php.d \
+#    && ln -sf /w/dev-conf/dev-php/php.d /etc/php.d
+
+COPY ./conf /etc/
 
 EXPOSE 9000
 
-CMD ["supervisord", "-c", "/w/dev-conf/dev-php/supervisord.conf"]
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
