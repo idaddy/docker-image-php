@@ -10,11 +10,8 @@ RUN yum -y install epel-release  \
     && yum -y update \
     && yum -y install supervisor crontabs make php-fpm php-mcrypt libxml2-devel libcurl-devel git \
         php-pecl-solr2 php-pecl-redis php-mysql php-pdo php-bcmath php-gd php-mbstring \
-        php-tidy php-pecl-memcache php-pecl-imagick php-pecl-gearman gcc php-devel re2c pcre-devel yasm \
+        php-tidy php-pecl-memcache php-pecl-imagick php-pecl-xdebug php-pecl-gearman gcc php-devel re2c pcre-devel yasm \
     && yum -y clean all
-
-# Phalcon patch zend_API.h
-# COPY ./zend_API.h /usr/include/php/Zend/
 
 RUN cd /root \
     && git clone --depth=1 https://github.com/phalcon/cphalcon.git \
@@ -41,13 +38,6 @@ RUN cd /root \
     && make install \
     && cd /root \
     && rm -rf ffmpeg_php
-
-#RUN ln -sf /w/dev-conf/dev-php/php-fpm.conf /etc/php-fpm.conf \
-#    && rm -rf /etc/php-fpm.d \
-#    && ln -sf /w/dev-conf/dev-php/php-fpm.d /etc/php-fpm.d \
-#    && ln -sf /w/dev-conf/dev-php/php.ini /etc/php.ini \
-#    && rm -rf /etc/php.d \
-#    && ln -sf /w/dev-conf/dev-php/php.d /etc/php.d
 
 COPY ./conf /etc/
 
