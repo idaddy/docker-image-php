@@ -15,8 +15,11 @@ RUN yum -y install epel-release  \
 
 RUN cd /root \
     && git clone --depth=1 https://github.com/phalcon/cphalcon.git \
-    && cd cphalcon/build \
-    && ./install \
+    && cd cphalcon/build/64bits \
+    && phpize \
+    && ./configure CFLAGS="-O2 -march=corei7 -mtune=corei7" \
+    && make \
+    && make install \
     && cd /root \
     && rm -rf cphalcon
 
