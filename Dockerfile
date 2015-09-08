@@ -9,7 +9,7 @@ MAINTAINER Dennis Zou <denniszou@gmail.com>
 RUN yum -y install epel-release  \
     && yum -y update \
     && yum -y install supervisor crontabs make php-fpm php-mcrypt libxml2-devel libcurl-devel git \
-        php-pecl-solr2 php-pecl-redis php-mysql php-pdo php-bcmath php-gd php-mbstring \
+        php-pecl-solr2 php-pecl-redis php-mysql php-pdo php-bcmath php-gd php-mbstring composer \
         php-tidy php-pecl-memcache php-pecl-imagick php-pecl-xdebug php-pecl-gearman gcc php-devel re2c pcre-devel yasm \
     && yum -y clean all
 
@@ -31,16 +31,6 @@ RUN cd /root \
     && make install \
     && cd /root \
     && rm -rf FFmpeg
-
-RUN cd /root \
-    && git clone --depth=1 https://github.com/tony2001/ffmpeg-php.git \
-    && cd ffmpeg-php \
-    && phpize \
-    && ./configure \
-    && make \
-    && make install \
-    && cd /root \
-    && rm -rf ffmpeg_php
 
 COPY ./conf /etc/
 
