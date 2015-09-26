@@ -57,13 +57,8 @@ RUN cd /usr/src/php \
 COPY docker-php-ext-* /usr/local/bin/
 
 RUN docker-php-ext-install bcmath dom gd fileinfo json mbstring mcrypt mysql mysqli pdo pdo_mysql pdo_sqlite phar posix \
-    sysvmsg sysvsem sysvshm tidy wddx xmlreader xmlwriter xsl zip \
-    && pecl install -s gearman \
-    && pecl install -s igbinary \
-    && pecl install -s imagick \
-    && pecl install -s memcache \
-    && pecl install -s redis \
-    && pecl install -s solr
+    sysvmsg sysvsem sysvshm tidy wddx xmlreader xmlwriter xsl zip 
+RUN pecl install gearman igbinary imagick memcache redis solr
 
 RUN cd /root \
     && git clone --depth=1 https://github.com/phalcon/cphalcon.git \
