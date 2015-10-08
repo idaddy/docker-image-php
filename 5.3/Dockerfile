@@ -79,6 +79,18 @@ RUN cd /root \
     && cd /root \
     && rm -rf FFmpeg
 
+# 5.3版php的xdebug需要收工编译
+RUN cd /root \
+    && curl -L -o xdebug-2.2.7.tar.gz https://github.com/xdebug/xdebug/archive/2.2.7.tar.gz \
+    && tar xvzf xdebug-2.2.7.tar.gz \
+    && cd xdebug-2.2.7 \
+    && phpize \
+    && ./configure --enable-xdebug \
+    && make \
+    && make install \
+    && cd /root \
+    && rm -rf xdebug*
+
 RUN cd /root \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
