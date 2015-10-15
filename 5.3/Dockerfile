@@ -98,6 +98,10 @@ RUN cd /root \
 COPY ./conf /etc/
 COPY php-fpm.conf /usr/local/etc/
 
+# 为适应apswww中的apscli程序建立的连接
+RUN ln -sf /usr/local/etc/php/php.ini /etc/php_dev.ini \
+    && ln -sf /usr/local/bin/php /usr/bin/php
+
 EXPOSE 9000
 
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
