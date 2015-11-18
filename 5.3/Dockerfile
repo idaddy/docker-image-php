@@ -58,7 +58,8 @@ COPY docker-php-ext-* /usr/local/bin/
 
 RUN docker-php-ext-install bcmath dom gd fileinfo json mbstring mcrypt mysql mysqli pdo pdo_mysql pdo_sqlite phar posix \
     sysvmsg sysvsem sysvshm tidy wddx xmlreader xmlwriter xsl zip 
-RUN pecl install gearman igbinary imagick memcache redis solr
+RUN pecl install gearman igbinary imagick memcache redis solr ZendOpcache \
+    && pecl install channel://pecl.php.net/xhprof-0.9.4
 
 RUN cd /root \
     && git clone --depth=1 https://github.com/phalcon/cphalcon.git \
@@ -101,6 +102,8 @@ COPY php-fpm.conf /usr/local/etc/
 # 为适应apswww中的apscli程序建立的连接
 RUN ln -sf /usr/local/etc/php/php.ini /etc/php_dev.ini \
     && ln -sf /usr/local/bin/php /usr/bin/php
+
+VOLUME /var/spool/cron
 
 EXPOSE 9000
 

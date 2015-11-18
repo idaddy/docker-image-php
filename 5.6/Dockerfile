@@ -58,7 +58,7 @@ COPY docker-php-ext-* /usr/local/bin/
 
 RUN docker-php-ext-install bcmath dom fileinfo gd json mbstring mcrypt mysql mysqli pdo pdo_mysql pdo_sqlite phar posix \
     sysvmsg sysvsem sysvshm tidy wddx xmlreader xmlwriter xsl zip 
-RUN pecl install gearman igbinary imagick memcache redis solr xdebug
+RUN pecl install gearman igbinary imagick memcache redis solr xdebug swoole channel://pecl.php.net/xhprof-0.9.4
 
 RUN cd /root \
     && git clone --depth=1 https://github.com/phalcon/cphalcon.git \
@@ -83,8 +83,14 @@ RUN cd /root \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
+RUN yum -y install python-pip redis \
+    && yum -y clean all \
+    && pip install redis
+
 COPY ./conf /etc/
 COPY php-fpm.conf /usr/local/etc/
+
+VOLUME /var/spool/cron
 
 EXPOSE 9000
 
