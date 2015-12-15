@@ -83,9 +83,9 @@ RUN cd /root \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 
-RUN yum -y install python-pip redis \
+RUN yum -y install python-pip redis python-devel \
     && yum -y clean all \
-    && pip install redis
+    && pip install redis lxml beautifulsoup pymysql
 
 COPY ./conf /etc/
 COPY php-fpm.conf /usr/local/etc/
