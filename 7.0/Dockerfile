@@ -23,7 +23,7 @@ RUN mkdir -p $PHP_INI_DIR/conf.d
 
 RUN ln -s   /usr/lib64/mysql/libmysqlclient.so /usr/lib/libmysqlclient.so
 
-ENV PHP_VERSION 5.6.13
+ENV PHP_VERSION 7.0.1
 
 # --enable-mysqlnd is included below because it's harder to compile after the fact the extensions are (since it's a plugin for several extensions, not an extension in itself)
 RUN set -x \
