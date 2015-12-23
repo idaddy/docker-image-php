@@ -12,7 +12,7 @@ RUN yum -y install epel-release  \
     && yum -y install supervisor crontabs make git gcc autoconf re3c yasm \
 # install php depend libs
     && yum -y install bzip2 libcurl-devel pcre-devel readline-devel recode-devel sqlite-devel openssl-devel libxml2-devel \
-    && yum -y install gd-devel libgearman-devel ImageMagick-devel libmcrypt-devel mariadb-devel libtidy-devel libxslt-devel java-1.8.0-openjdk \
+    && yum -y install gd-devel libgearman-devel ImageMagick-devel libmcrypt-devel mariadb-devel libtidy-devel libxslt-devel java-1.8.0-openjdk unzip \
     && yum -y clean all
 
 #    && yum -y install php-fpm php-mcrypt php-pecl-solr2 php-pecl-redis php-mysql php-pdo php-bcmath php-mbstring composer \
@@ -56,7 +56,7 @@ RUN cd /usr/src/php \
 
 COPY docker-php-ext-* /usr/local/bin/
 
-RUN docker-php-ext-install bcmath dom fileinfo gd json mbstring mcrypt mysql mysqli pdo pdo_mysql pdo_sqlite phar posix \
+RUN docker-php-ext-install bcmath dom fileinfo gd json mbstring mcrypt mysqli pdo pdo_mysql pdo_sqlite phar posix \
     sysvmsg sysvsem sysvshm tidy wddx xmlreader xmlwriter xsl zip 
 RUN pecl install gearman igbinary imagick memcache redis solr xdebug swoole channel://pecl.php.net/xhprof-0.9.4
 
